@@ -41,28 +41,28 @@ spec:
         app: nginx
     spec:
       volumes:
-        - name: nginx-volume
-          configMap:
-            name: nginx-config
+      - name: nginx-volume
+        configMap:
+          name: nginx-config
       containers:
-        - name: nginx
-          image: nginx:latest
-          imagePullPolicy: Always
-          ports:
-            - containerPort: 80
-          volumeMounts:
-            - name: nginx-volume
-              mountPath: /etc/nginx/
+      - name: nginx
+        image: nginx:latest
+        imagePullPolicy: Always
+        ports: 
+        - containerPort: 80
+        volumeMounts:
+        - name: nginx-volume
+          mountPath: /etc/nginx/
 ---
 apiVersion: v1
 kind: Service
 metadata:
   name: nginx-service
 spec:
-  type: LoadBalancer
+  type: LoadBalancer 
   selector:
     app: nginx
   ports:
-    - protocol: TCP
-      port: 80
-      targetPort: 80
+  - protocol: TCP
+    port: 80
+    targetPort: 80
